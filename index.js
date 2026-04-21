@@ -85,3 +85,28 @@ function highlightWords(text) {
 
     return result;
 }
+
+const confirmButton = document.querySelector('.confirm-order');
+
+confirmButton.addEventListener('click', () => {
+    const timeInput = document.querySelector('.order-time');
+    const value = timeInput.value;
+
+    if (!value) return;
+
+    const [hours, minutes] = value.split(':').map(Number);
+
+    const now = new Date();
+    const selectedTime = new Date();
+
+    selectedTime.setHours(hours, minutes, 0, 0);
+
+    if (selectedTime < now) {
+        timeInput.style.border = '2px solid red';
+        alert('Мы не умеем перемещаться во времени. Выберите время позже, чем текущее');
+        return;
+    }
+
+    timeInput.style.border = '';
+    modalOverlay.classList.add('hidden');
+});

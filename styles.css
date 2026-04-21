@@ -100,3 +100,40 @@
     display: none;
 }
 
+.time-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+.time-text {
+    align-content: center;
+}
+
+.order-time {
+    padding: 6px 10px;
+
+    font-size: 14px;
+
+    border: 1px solid gray;
+    border-radius: 6px;
+
+    outline: none;
+}
+
+.confirm-order {
+    margin-top: 20px;
+    padding: 10px 18px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: white;
+    background-color: mediumseagreen;
+
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
