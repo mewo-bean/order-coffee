@@ -37,3 +37,16 @@ form.addEventListener('click', (event) => {
         }
     }
 });
+
+const modalOverlay = document.getElementById('order-modal');
+const closeModalButton = document.querySelector('.close-modal-button');
+
+// отправка формы
+form.addEventListener('submit', (event) => {
+    event.preventDefault(); 
+    modalOverlay.classList.remove('hidden'); 
+});
+
+closeModalButton.addEventListener('click', () => {
+    modalOverlay.classList.add('hidden');
+});
