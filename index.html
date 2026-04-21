@@ -68,7 +68,20 @@
     <div class="modal-overlay hidden" id="order-modal">
       <div class="modal-content">
         <button type="button" class="close-modal-button">𐕣</button>
-        <p>Заказ принят!</p>
+        <h3>Заказ принят!</h3>
+        <p>Вы заказали <span id="beverage-count-text"></span></p>
+        
+        <table class="order-table">
+          <thead>
+            <tr>
+              <th>Напиток</th>
+              <th>Молоко</th>
+              <th>Дополнительно</th>
+            </tr>
+          </thead>
+          <tbody id="order-table-body">
+            </tbody>
+        </table>
       </div>
     </div>
     <script src="index.js"></script>

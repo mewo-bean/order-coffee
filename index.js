@@ -1,6 +1,27 @@
-const addButon = document.querySelector('.add-button');
+const addButton = document.querySelector('.add-button');
+const form = document.querySelector('form');
+const modalOverlay = document.getElementById('order-modal');
+const closeModalButton = document.querySelector('.close-modal-button');
+const tableBody = document.getElementById('order-table-body');
+const countTextElement = document.getElementById('beverage-count-text');
 
-addButon.addEventListener('click', () => {
+function getDeclension(number, words) {
+    const num = Math.abs(number) % 100;
+    const lastDigit = num % 10;
+
+    if (num >= 11 && num <= 19) {
+        return words[2];
+    }
+    if (lastDigit === 1) {
+        return words[0];
+    }
+    if (lastDigit >= 2 && lastDigit <= 4) {
+        return words[1];
+    }
+    return words[2];
+}
+
+addButton.addEventListener('click', () => {
     const beverages = document.querySelectorAll('.beverage');
     const last = beverages[beverages.length - 1];
 
@@ -25,8 +46,7 @@ addButon.addEventListener('click', () => {
     });
 
     last.after(newBeverage);
-})
-const form = document.querySelector('form');
+});
 
 form.addEventListener('click', (event) => {
     if (event.target.classList.contains('remove-button')) {
@@ -38,15 +58,42 @@ form.addEventListener('click', (event) => {
     }
 });
 
-const modalOverlay = document.getElementById('order-modal');
-const closeModalButton = document.querySelector('.close-modal-button');
+closeModalButton.addEventListener('click', () => {
+    modalOverlay.classList.add('hidden');
+});
 
 // отправка формы
 form.addEventListener('submit', (event) => {
     event.preventDefault(); 
-    modalOverlay.classList.remove('hidden'); 
-});
+    
+    const beverages = document.querySelectorAll('.beverage');
+    const count = beverages.length;
+    
+    const drinkWord = getDeclension(count, ['напиток', 'напитка', 'напитков']);
+    countTextElement.textContent = `${count} ${drinkWord}`;
 
-closeModalButton.addEventListener('click', () => {
-    modalOverlay.classList.add('hidden');
+    tableBody.innerHTML = '';
+
+    beverages.forEach((beverage) => {
+        const select = beverage.querySelector('select');
+        const drinkName = select.options[select.selectedIndex].textContent;
+
+        const milkInput = beverage.querySelector('input[type="radio"]:checked');
+        const milkName = milkInput ? milkInput.nextElementSibling.textContent : '';
+
+        const optionInputs = beverage.querySelectorAll('input[type="checkbox"]:checked');
+        const optionsArray = Array.from(optionInputs).map(input => input.nextElementSibling.textContent);
+        const optionsName = optionsArray.join(', ');
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${drinkName}</td>
+            <td>${milkName}</td>
+            <td>${optionsName}</td>
+        `;
+        
+        tableBody.appendChild(row);
+    });
+
+    modalOverlay.classList.remove('hidden'); 
 });

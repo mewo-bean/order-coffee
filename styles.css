@@ -80,7 +80,6 @@
     position: relative;
     text-align: center;
     font-size: 24px;
-    font-weight: bold;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -100,3 +99,24 @@
     display: none;
 }
 
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: left;
+}
+
+.order-table th, .order-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.order-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+}
