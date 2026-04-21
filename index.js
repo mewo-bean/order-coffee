@@ -61,14 +61,7 @@ form.addEventListener('click', (event) => {
     }
 });
 
-closeModalButton.addEventListener('click', () => {
-    modalOverlay.classList.add('hidden');
-});
-
-// отправка формы
 form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    modalOverlay.classList.remove('hidden');
     event.preventDefault();
 
     const beverages = document.querySelectorAll('.beverage');
@@ -89,12 +82,15 @@ form.addEventListener('submit', (event) => {
         const optionInputs = beverage.querySelectorAll('input[type="checkbox"]:checked');
         const optionsArray = Array.from(optionInputs).map(input => input.nextElementSibling.textContent);
         const optionsName = optionsArray.join(', ');
+        const extraTextarea = beverage.querySelector('.extra-text');
+        const extraText = extraTextarea.value; 
 
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${drinkName}</td>
             <td>${milkName}</td>
             <td>${optionsName}</td>
+            <td>${extraText}</td> 
         `;
 
         tableBody.appendChild(row);
