@@ -26,3 +26,14 @@ addButon.addEventListener('click', () => {
 
     last.after(newBeverage);
 })
+const form = document.querySelector('form');
+
+form.addEventListener('click', (event) => {
+    if (event.target.classList.contains('remove-button')) {
+        const beverages = document.querySelectorAll('.beverage');
+        
+        if (beverages.length > 1) {
+            event.target.closest('.beverage').remove();
+        }
+    }
+});
