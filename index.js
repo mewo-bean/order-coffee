@@ -120,12 +120,12 @@ form.addEventListener('input', (event) => {
 
 function highlightWords(text) {
     const words = [
+        'очень нужно',
+        'побыстрее',
+        'поскорее',
         'срочно',
         'быстрее',
-        'побыстрее',
-        'скорее',
-        'поскорее',
-        'очень нужно'
+        'скорее'
     ];
 
     let result = text;
