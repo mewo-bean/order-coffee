@@ -5,7 +5,10 @@ addButon.addEventListener('click', () => {
     const last = beverages[beverages.length - 1];
 
     const newBeverage = last.cloneNode(true);
-    const newIndex = beverages.length + 1;
+
+    const lastTitle = last.querySelector('.beverage-count').textContent;
+    const lastIndex = parseInt(lastTitle.match(/\d+/)[0], 10);
+    const newIndex = lastIndex + 1;
 
     const title = newBeverage.querySelector('.beverage-count');
     title.textContent = `Напиток №${newIndex}`;
@@ -25,7 +28,8 @@ addButon.addEventListener('click', () => {
     });
 
     last.after(newBeverage);
-})
+});
+
 const form = document.querySelector('form');
 
 form.addEventListener('click', (event) => {
@@ -37,3 +41,34 @@ form.addEventListener('click', (event) => {
         }
     }
 });
+
+form.addEventListener('input', (event) => {
+    if (event.target.classList.contains('extra-text')) {
+        const textarea = event.target;
+        const beverage = textarea.closest('.beverage');
+        const preview = beverage.querySelector('.preview');
+
+        const text = textarea.value;
+        preview.innerHTML = highlightWords(text);
+    }
+});
+
+function highlightWords(text) {
+    const words = [
+        'срочно',
+        'быстрее',
+        'побыстрее',
+        'скорее',
+        'поскорее',
+        'очень нужно'
+    ];
+
+    let result = text;
+
+    words.forEach(word => {
+        const regex = new RegExp(`(${word})`, 'gi');
+        result = result.replace(regex, '<b>$1</b>');
+    });
+
+    return result;
+}
